@@ -1,300 +1,736 @@
 <!DOCTYPE html>
-<html lang="ru" class="page">
-
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="theme-color" content="#111111">
-  <title>Клуб четырёх коней</title>
-  <link rel="preload" href="fonts/GolosTextRegular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/GolosTextMedium.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/GolosTextSemiBold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/MerriweatherRegular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/vendor.css">
-  <link rel="stylesheet" href="css/main.css">
-  <script defer src="js/main.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoImport Pro - Автомобили из-за рубежа под заказ</title>
+    <meta name="description" content="Профессиональная доставка автомобилей из Европы, США, Японии. Полное сопровождение сделки, растаможка, гарантия качества.">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #ffd700;
+        }
+
+        .phone {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(30, 60, 114, 0.8), rgba(42, 82, 152, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23e9ecef" width="1200" height="800"/><polygon fill="%23dee2e6" points="0,800 1200,600 1200,800"/><polygon fill="%23ced4da" points="0,600 600,400 1200,500 1200,800 0,800"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #ff6b35;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            background: #e55a2e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #1e3c72;
+        }
+
+        /* Advantages Section */
+        .advantages {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e3c72;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .advantage-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: #f8f9fa;
+            transition: transform 0.3s;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .advantage-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .advantage-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e3c72;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b35;
+            margin-top: 1rem;
+        }
+
+        /* Cars Gallery */
+        .cars {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .car-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .car-image {
+            height: 250px;
+            background: linear-gradient(45deg, #e9ecef, #dee2e6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #6c757d;
+        }
+
+        .car-info {
+            padding: 1.5rem;
+        }
+
+        .car-info h3 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        .car-specs {
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        .car-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: #ff6b35;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .step h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Form */
+        .contact {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item strong {
+            color: #1e3c72;
+        }
+
+        .form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1e3c72;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b35;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e3c72;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .advantages-grid,
+            .services-grid,
+            .cars-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .advantage-card,
+        .service-card,
+        .car-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
 </head>
-
-<body class="page__body">
-  <div class="site-container">
+<body>
+    <!-- Header -->
     <header class="header">
-  <div class="container">
-    <a href="#" class="logo">
-      <img src="./img/logo.svg" width="246" height="36" alt="Логотип клуба четырех коней">
-    </a>
-  </div>
-</header>
-
-    <main class="main">
-      <section class="hero overlay">
-  <div class="container">
-    <div class="hero__content">
-      <h1 class="title">
-        Превратите уездный город
-        <span class="hero__title-center">в столицу</span>
-        <span class="hero__title-right">земного шара</span>
-      </h1>
-      <p class="hero__text">Оплатите взнос на телеграммы для организации Международного васюкинского турнира по шахматам</p>
-      <div class="hero__btns">
-        <a href="#thought" class="btn hero__btn  hero__btn--black">Поддержать шахматную мысль</a>
-        <a href="#detailed" class="btn hero__btn  hero__btn--light">Подробнее о турнире</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-      <div class="ticker">
-  <div class="ticker__wrapper">
-    <div class="ticker__item">
-      <span class="ticker__text">Дело помощи утопающим — дело рук самих утопающих!</span>
-      <span class="ticker__text">Шахматы двигают вперёд не только культуру, но и экономику!</span>
-      <span class="ticker__text">Лед тронулся, господа присяжные заседатели!</span>
-    </div>
-    <div class="ticker__item">
-      <span class="ticker__text">Дело помощи утопающим — дело рук самих утопающих!</span>
-      <span class="ticker__text">Шахматы двигают вперёд не только культуру, но и экономику!</span>
-      <span class="ticker__text">Лед тронулся, господа присяжные заседатели!</span>
-    </div>
-    <div class="ticker__item">
-      <span class="ticker__text">Дело помощи утопающим — дело рук самих утопающих!</span>
-      <span class="ticker__text">Шахматы двигают вперёд не только культуру, но и экономику!</span>
-      <span class="ticker__text">Лед тронулся, господа присяжные заседатели!</span>
-    </div>
-  </div>
-</div>
-
-      <section class="tournament">
-  <div class="container">
-    <div id="thought" class="tournament__row">
-      <h2 class="tournament__title">Чтобы поддержать Международный васюкинский турнир <span class="tournament__order">посетите лекцию на тему: <span class="tournament__title-color">«Плодотворная дебютная идея»</span></span> </h2>
-      <div class="tournament__img img-radius overlay">
-        <img loading="lazy" class="img-radius" src="img/photo-1.jpg" width="394" height="250"
-            alt="Мужчины играют в шахматы">
-      </div>
-    </div>
-    <div id="detailed" class="tournament__row tournament__row--gap">
-      <div class="tournament__img tournament__img--transform overlay">
-        <img loading="lazy" src="img/photo-2.jpg" width="514" height="575"
-          alt="Мужчина играет в шахматы и выбивает коня">
-      </div>
-      <div class="tournament__content">
-        <h2 class="tournament__title tournament__title--mb">и Сеанс <span class="tournament__title-color">одновременной
-            игры в шахматы на 160 досках</span> гроссмейстера О. Бендера</h2>
-        <table class="table tournament__table">
-          <tr class="table__row">
-            <th class="table__header pt-0">Место проведения:</th>
-            <td class="table__text pt-0">Клуб «Картонажник»</td>
-          </tr>
-          <tr class="table__row">
-            <th class="table__header">Дата и время мероприятия:</th>
-            <td class="table__text">22 июня 1927 г. в 18:00</td>
-          </tr>
-          <tr class="table__row">
-            <th class="table__header">Стоимость входных билетов:</th>
-            <td class="table__text">20 коп.</td>
-          </tr>
-          <tr class="table__row">
-            <th class="table__header">Плата за игру:</th>
-            <td class="table__text">50 коп.</td>
-          </tr>
-          <tr class="table__row">
-            <th class="table__header">Взнос на телеграммы:</th>
-            <td class="table__text"><s class="table__decore">100 руб.</s> 21 руб. 16 коп.</td>
-          </tr>
-        </table>
-        <span class="tournament__text">По всем вопросам обращаться в администрацию к К. Михельсону</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-      <section class="stages">
-  <div class="container">
-    <h2 class="section-title stages__title">Этапы преображения Васюков <span class="stages__subtitle">Будущие источники
-        обогащения васюкинцев</span></h2>
-    <div class="stages__slider-wrapper">
-      <ol class="list-reset stages__list">
-        <li class="stages__item overlay">
-          <span class="stages__text">Строительство железнодорожной магистрали Москва-Васюки</span>
-        </li>
-        <li class="stages__item overlay">
-          <span class="stages__text">Открытие фешенебельной гостиницы «Проходная пешка» и других небоскрёбов</span>
-        </li>
-        <li class="stages__item overlay">
-          <span class="stages__text">Поднятие сельского хозяйства в радиусе на тысячу километров: производство овощей,
-            фруктов, икры, шоколадных конфет</span>
-        </li>
-        <li class="stages__item overlay">
-          <span class="stages__text">Строительство дворца для турнира</span>
-        </li>
-        <li class="stages__item overlay">
-          <span class="stages__text">Размещение гаражей для гостевого автотранспорта</span>
-        </li>
-        <li class="stages__item overlay">
-          <span class="stages__text">Постройка сверхмощной радиостанции для передачи всему миру сенсационных
-            результатов</span>
-        </li>
-        <li class="stages__item overlay">
-          <span class="stages__text">Создание аэропорта «Большие Васюки» с регулярным отправлением почтовых самолётов и
-            дирижаблей во все концы света, включая Лос-Анжелос и Мельбурн</span>
-        </li>
-      </ol>
-      <div class="slider-btns stages__btns">
-        <button class="btn-reset slider-btns__prev stages__nav stages__nav--prev">
-          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="22" cy="22" r="22" transform="rotate(-180 22 22)" />
-            <path d="M24.5382 30.4615L16.0767 21.9999L24.5382 13.5384" stroke="white" stroke-width="2"
-              stroke-linecap="square" />
-          </svg>
-        </button>
-        <div class="stages__dots"></div>
-        <button class="btn-reset slider-btns__next stages__nav stages__nav--next">
-          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="22" cy="22" r="22" />
-            <path d="M19.4618 13.5384L27.9233 21.9999L19.4618 30.4615" stroke="white" stroke-width="2"
-              stroke-linecap="square" />
-          </svg>
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-      <section class="participants">
-  <div class="container participants__container">
-    <h2 class="section-title participants__title">Участники турнира</h2>
-    <div class="participants__slider">
-      <div class="slider-btns participants__btns">
-        <button class="btn-reset slider-btns__prev participants__btns-prev">
-          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="22" cy="22" r="22" transform="rotate(-180 22 22)" />
-            <path d="M24.5382 30.4615L16.0767 21.9999L24.5382 13.5384" stroke="white" stroke-width="2"
-              stroke-linecap="square" />
-          </svg>
-        </button>
-        <div class="slider-btns__counter participants__btns-counter">3/6</div>
-        <button class="btn-reset slider-btns__next participants__btns-next">
-          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="22" cy="22" r="22" />
-            <path d="M19.4618 13.5384L27.9233 21.9999L19.4618 30.4615" stroke="white" stroke-width="2"
-              stroke-linecap="square" />
-          </svg>
-        </button>
-      </div>
-      <div class="participants__slides">
-        <div class="participants__slide">
-          <div class="participants__img">
-            <picture class="participants__pic overlay">
-              <source srcset="./img/man.webp" type="image/webp">
-              <img loading="lazy" src="./img/man.png" width="293" height="333" alt="Хозе-Рауль Капабланка">
-            </picture>
-          </div>
-          <div class="participants__content">
-            <h3 class="participants__name">Хозе-Рауль Капабланка</h3>
-            <div class="participants__status">Чемпион мира по шахматам</div>
-            <a href="#/" class="participants__btn">Подробнее</a>
-          </div>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">🚗 AutoImport Pro</a>
+                <nav class="nav">
+                    <a href="#advantages">Преимущества</a>
+                    <a href="#services">Услуги</a>
+                    <a href="#cars">Автомобили</a>
+                    <a href="#contact">Контакты</a>
+                </nav>
+                <div class="phone">📞 +7 (999) 123-45-67</div>
+            </div>
         </div>
-        <div class="participants__slide">
-          <div class="participants__img">
-            <picture class="participants__pic overlay">
-              <source srcset="./img/man.webp" type="image/webp">
-              <img loading="lazy" src="./img/man.png" width="293" height="333" alt="Эммануил Ласкер">
-            </picture>
-          </div>
-          <div class="participants__content">
-            <h3 class="participants__name">Эммануил Ласкер</h3>
-            <div class="participants__status">Чемпион мира по шахматам</div>
-            <a href="#/" class="participants__btn">Подробнее</a>
-          </div>
-        </div>
-        <div class="participants__slide">
-          <div class="participants__img">
-            <picture class="participants__pic overlay">
-              <source srcset="./img/man.webp" type="image/webp">
-              <img loading="lazy" src="./img/man.png" width="293" height="333" alt="Александр Алехин">
-            </picture>
-          </div>
-          <div class="participants__content">
-            <h3 class="participants__name">Александр Алехин</h3>
-            <div class="participants__status">Чемпион мира по шахматам</div>
-            <a href="#/" class="participants__btn">Подробнее</a>
-          </div>
-        </div>
-        <div class="participants__slide">
-          <div class="participants__img">
-            <picture class="participants__pic overlay">
-              <source srcset="./img/man.webp" type="image/webp">
-              <img loading="lazy" src="./img/man.png" width="293" height="333" alt="Арон Нимцович">
-            </picture>
-          </div>
-          <div class="participants__content">
-            <h3 class="participants__name">Арон Нимцович</h3>
-            <div class="participants__status">Чемпион мира по шахматам</div>
-            <a href="#/" class="participants__btn">Подробнее</a>
-          </div>
-        </div>
-        <div class="participants__slide">
-          <div class="participants__img">
-            <picture class="participants__pic overlay">
-              <source srcset="./img/man.webp" type="image/webp">
-              <img loading="lazy" src="./img/man.png" width="293" height="333" alt="Рихард Рети">
-            </picture>
-          </div>
-          <div class="participants__content">
-            <h3 class="participants__name">Рихард Рети</h3>
-            <div class="participants__status">Чемпион мира по шахматам</div>
-            <a href="#/" class="participants__btn">Подробнее</a>
-          </div>
-        </div>
-        <div class="participants__slide">
-          <div class="participants__img">
-            <picture class="participants__pic overlay">
-              <source srcset="./img/man.webp" type="image/webp">
-              <img loading="lazy" src="./img/man.png" width="293" height="333" alt="Остап Бендер">
-            </picture>
-          </div>
-          <div class="participants__content">
-            <h3 class="participants__name">Остап Бендер</h3>
-            <div class="participants__status">Гроссмейстер</div>
-            <a href="#/" class="participants__btn">Подробнее</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </header>
 
-      <div class="ticker">
-  <div class="ticker__wrapper">
-    <div class="ticker__item">
-      <span class="ticker__text">Дело помощи утопающим — дело рук самих утопающих!</span>
-      <span class="ticker__text">Шахматы двигают вперёд не только культуру, но и экономику!</span>
-      <span class="ticker__text">Лед тронулся, господа присяжные заседатели!</span>
-    </div>
-    <div class="ticker__item">
-      <span class="ticker__text">Дело помощи утопающим — дело рук самих утопающих!</span>
-      <span class="ticker__text">Шахматы двигают вперёд не только культуру, но и экономику!</span>
-      <span class="ticker__text">Лед тронулся, господа присяжные заседатели!</span>
-    </div>
-    <div class="ticker__item">
-      <span class="ticker__text">Дело помощи утопающим — дело рук самих утопающих!</span>
-      <span class="ticker__text">Шахматы двигают вперёд не только культуру, но и экономику!</span>
-      <span class="ticker__text">Лед тронулся, господа присяжные заседатели!</span>
-    </div>
-  </div>
-</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Автомобили из-за рубежа под заказ</h1>
+            <p>Профессиональная доставка авто из Европы, США и Японии. Полное сопровождение сделки от поиска до постановки на учет.</p>
+            <a href="#contact" class="btn">Заказать авто</a>
+            <a href="#services" class="btn btn-secondary">Узнать больше</a>
+        </div>
+    </section>
 
-    </main>
+    <!-- Advantages Section -->
+    <section id="advantages" class="advantages">
+        <div class="container">
+            <h2 class="section-title">Почему выбирают нас</h2>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">⭐</div>
+                    <h3>15 лет опыта</h3>
+                    <p>Более 5000 успешно доставленных автомобилей из-за рубежа с полным сопровождением</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">🛡️</div>
+                    <h3>Гарантия качества</h3>
+                    <p>Тщательная проверка истории авто, техническое состояние, юридическая чистота</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">💰</div>
+                    <h3>Экономия до 40%</h3>
+                    <p>Стоимость авто из-за рубежа значительно ниже аналогов на российском рынке</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">🚚</div>
+                    <h3>Полный сервис</h3>
+                    <p>От поиска и покупки до доставки и постановки на учет - все под ключ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>🔍 Поиск и подбор автомобиля</h3>
+                    <p>Находим идеальный автомобиль согласно вашим требованиям и бюджету на крупнейших аукционах мира</p>
+                    <div class="price">от 30 000 ₽</div>
+                </div>
+                <div class="service-card">
+                    <h3>📋 Проверка истории и состояния</h3>
+                    <p>Детальная проверка VIN, истории ДТП, пробега, техническое обследование</p>
+                    <div class="price">от 15 000 ₽</div>
+                </div>
+                <div class="service-card">
+                    <h3>🚢 Доставка и растаможка</h3>
+                    <p>Морская/автомобильная доставка, полное таможенное оформление, сертификация ОТТС</p>
+                    <div class="price">от 150 000 ₽</div>
+                </div>
+                <div class="service-card">
+                    <h3>📄 Оформление документов</h3>
+                    <p>Постановка на учет в ГИБДД, получение СТС, страхование ОСАГО</p>
+                    <div class="price">от 20 000 ₽</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cars Gallery -->
+    <section id="cars" class="cars">
+        <div class="container">
+            <h2 class="section-title">Популярные модели</h2>
+            <div class="cars-grid">
+                <div class="car-card">
+                    <div class="car-image">🚗</div>
+                    <div class="car-info">
+                        <h3>BMW X5 2020</h3>
+                        <div class="car-specs">3.0 л • Автомат • Полный привод • 45,000 км</div>
+                        <div class="car-price">от 3 200 000 ₽</div>
+                    </div>
+                </div>
+                <div class="car-card">
+                    <div class="car-image">🚙</div>
+                    <div class="car-info">
+                        <h3>Mercedes-Benz GLE 2021</h3>
+                        <div class="car-specs">2.0 л • Автомат • Полный привод • 32,000 км</div>
+                        <div class="car-price">от 4 500 000 ₽</div>
+                    </div>
+                </div>
+                <div class="car-card">
+                    <div class="car-image">🏎️</div>
+                    <div class="car-info">
+                        <h3>Audi Q7 2019</h3>
+                        <div class="car-specs">3.0 л • Автомат • Полный привод • 58,000 км</div>
+                        <div class="car-price">от 2 800 000 ₽</div>
+                    </div>
+                </div>
+                <div class="car-card">
+                    <div class="car-image">🚘</div>
+                    <div class="car-info">
+                        <h3>Toyota Land Cruiser Prado 2020</h3>
+                        <div class="car-specs">2.8 л • Автомат • Полный привод • 41,000 км</div>
+                        <div class="car-price">от 3 700 000 ₽</div>
+                    </div>
+                </div>
+                <div class="car-card">
+                    <div class="car-image">🚗</div>
+                    <div class="car-info">
+                        <h3>Lexus RX 350 2021</h3>
+                        <div class="car-specs">3.5 л • Автомат • Полный привод • 28,000 км</div>
+                        <div class="car-price">от 4 100 000 ₽</div>
+                    </div>
+                </div>
+                <div class="car-card">
+                    <div class="car-image">🚙</div>
+                    <div class="car-info">
+                        <h3>Porsche Cayenne 2020</h3>
+                        <div class="car-specs">3.0 л • Автомат • Полный привод • 35,000 км</div>
+                        <div class="car-price">от 5 200 000 ₽</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="container">
+            <h2 class="section-title">Как мы работаем</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Консультация</h3>
+                    <p>Обсуждаем ваши требования, бюджет и предпочтения по марке и модели</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Поиск авто</h3>
+                    <p>Находим подходящие варианты на аукционах США, Европы и Японии</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Проверка</h3>
+                    <p>Детальная проверка истории, технического состояния и документов</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Покупка</h3>
+                    <p>Участие в торгах, выкуп автомобиля, оформление сделки</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Доставка</h3>
+                    <p>Транспортировка, растаможка, получение всех необходимых документов</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <h3>Передача</h3>
+                    <p>Постановка на учет в ГИБДД и передача готового автомобиля клиенту</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Свяжитесь с нами</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Контактная информация</h3>
+                    <div class="contact-item">
+                        <strong>Телефон:</strong><br>
+                        +7 (999) 123-45-67<br>
+                        +7 (495) 123-45-67
+                    </div>
+                    <div class="contact-item">
+                        <strong>Email:</strong><br>
+                        info@autoimportpro.ru
+                    </div>
+                    <div class="contact-item">
+                        <strong>Адрес:</strong><br>
+                        г. Москва, ул. Примерная, д. 123
+                    </div>
+                    <div class="contact-item">
+                        <strong>Режим работы:</strong><br>
+                        Пн-Пт: 09:00 - 19:00<br>
+                        Сб: 10:00 - 16:00<br>
+                        Вс: выходной
+                    </div>
+                    <div class="contact-item">
+                        <strong>Мессенджеры:</strong><br>
+                        WhatsApp: +7 (999) 123-45-67<br>
+                        Telegram: @autoimportpro
+                    </div>
+                </div>
+                <form class="form">
+                    <h3>Оставьте заявку</h3>
+                    <div class="form-group">
+                        <label for="name">Ваше имя *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="car">Интересующий автомобиль</label>
+                        <select id="car" name="car">
+                            <option value="">Выберите марку</option>
+                            <option value="bmw">BMW</option>
+                            <option value="mercedes">Mercedes-Benz</option>
+                            <option value="audi">Audi</option>
+                            <option value="toyota">Toyota</option>
+                            <option value="lexus">Lexus</option>
+                            <option value="porsche">Porsche</option>
+                            <option value="other">Другая марка</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget">Бюджет (руб.)</label>
+                        <select id="budget" name="budget">
+                            <option value="">Выберите бюджет</option>
+                            <option value="1-2">1-2 млн</option>
+                            <option value="2-3">2-3 млн</option>
+                            <option value="3-5">3-5 млн</option>
+                            <option value="5+">Свыше 5 млн</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Дополнительная информация</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Опишите ваши требования к автомобилю..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer">
-  <div class="container">
-    <p class="footer__text">Все персонажи, события и цитаты являются вымышленными и не принадлежат создателям сайта. С подробностями можно познакомиться в главе XXXIV романа Ильи Ильфа и Евгения Петрова «Двенадцать стульев».</p>
-  </div>
-</footer>
+        <div class="container">
+            <p>&copy; 2024 AutoImport Pro. Все права защищены. | ИП Иванов И.И. | ОГРНИП: 123456789012345</p>
+        </div>
+    </footer>
 
-  </div>
+    <script>
+        // Smooth scrolling для навигации
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Обработка формы
+        document.querySelector('.form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+            this.reset();
+        });
+
+        // Анимация счетчиков при скролле
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0s';
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Наблюдаем за карточками
+        document.querySelectorAll('.advantage-card, .service-card, .car-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
 </body>
-
 </html>
